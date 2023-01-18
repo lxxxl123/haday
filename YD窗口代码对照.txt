@@ -1,0 +1,264 @@
+yd窗口代码对照：
+
+frmbarcode2user.scx			用户条码登记
+frmpp2syncvt.scx			用户条码登记
+frmbarcodlogin.scx			用户条码登录
+hiv_barcodelist.scx			条码打印管理列表
+qc_barcodesmp_list.scx		用户样品条码打印管理
+
+frmsqlfile.scx				附加文件管理
+
+hiv_chgnextmodify.scx		菌种变更申请单后期处理表
+hiv_chgorderauditlist.scx	菌种变更申请订单列表
+hiv_chgorderlist.scx		菌种变更申请订单列表
+hiv_chgordermodify.scx		菌种变更申请订单
+
+hiv_mainbatchadd.scx		菌种批量新增
+hiv_mainmdylist.scx			菌种使用记录
+
+hiv_mainmodify.scx			菌种主数据维护
+hiv_main_list.scx			菌种主数据列表
+
+hiv_pdorderlist.scx			菌种生产订单列表
+hiv_pdordermodify.scx		菌种生产订单明细
+
+hiv_pdorderreceive.scx		生产订单收货
+hiv_usergroup.scx			用户组维护表
+hiv_usergroup_list.scx		用户组列表
+
+hiv_usgp2kp.scx				用户组与保藏形式关联表
+hiv_keeptype_list.scx		保藏形式编码维护表
+
+htdept_list.scx				部门列表
+
+powerbase.scx				权限资料资料管理窗口
+powergroup.scx				权限组管理
+poweruser_list.scx			系统用户管理
+poweruser_new.scx			权限用户登记
+power_new.scx				权限登记
+
+pwgp_allot.scx				角色权限分配
+pwus_allot.scx				特殊权限分配
+pwus_gpitem.scx				用户权限角色授权
+pwus_list.scx				授权清单
+qcam_userlist.scx			NIR平台用户维护
+
+personeffictrpt.scx			员工月度排名表
+personeffictrptqx.scx		数据权限分配
+personeffictsumrpt.scx		员工各月得分汇总表
+
+qc_ap2vt_list.scx			仪器与检验特性关联表
+qc_ap2vt_modify.scx			仪器参数维护表
+qc_apparatuses_list.scx		仪器编码维护表
+qc_appara_at.scx			仪器参数维护表
+qc_appara_item.scx			仪器参数维护表
+qc_apphotoitem.scx			仪器图谱录入界面
+qc_apphototype.scx			仪器图谱类别维护表
+qc_atomrecords_list.scx		原始记录编码维护表
+
+qc_appraisereport_item.scx	感管鉴评半成品标准样报告明细
+qc_appraisereport_list.scx	感管鉴评半成品标准样报告列表
+qc_appraisereport_rtp.scx	感管鉴评半成品标准样查询
+
+qc_appara_room_list.scx		实验室编码维护表
+qc_apprar_temperature.scx	实验室温湿度维护
+qc_approom2user_modify.scx	实验室-人员对应关系
+qc_room_brevitycode.scx		实验室简码维护表
+
+qc_barcodesample_list.scx	样品单列表-(计划内样)[条码]
+qc_barcodesample_modify.scx	样品单明细(计划内)
+qc_barcodesavesample_clear.scx	留样清出
+qc_barcodesavesample_modify.scx	产品留样
+qc_barcodesavesample_output.scx	留样取出
+qc_barcodesmpclear_insp.scx	检验样品清出
+qc_barcodesmptake_insp.scx	检验样品取出
+
+qc_codegather_list.scx		代码集与代码组关联表
+qc_codegather_modify.scx	代码集维护表
+qc_codegroup_list.scx		代码组与代码列表
+qc_code_list.scx			代码维护表
+qc_code_modify.scx			代码维护表
+
+qc_entrust_list.scx			协议书管理列表
+qc_entrust_modify.scx		新增协议书界面
+qc_entrust_time_rationality.scx	时间合理性监控报表
+qc_entrust_vdsurvey.scx		客户满意度调查
+qc_entrust_vg2vt.scx		检验项目选择
+qc_entrust_vt_result.scx	受托样检验结果
+
+qc_ent_qals_confirm.scx		检测结果批准
+qc_ent_qals_confirmed.scx	已批结果查询
+qc_ent_quarantinelist.scx	待检样品数量查询界面
+qc_ent_quarantinevt.scx		待检特性查询界面
+qc_ent_vdsurveylist.scx		客户满意度调查结果查询
+
+qc_insplot_template.scx		受托样检验计划维护
+qc_insplot_tplt_main.scx	受托样检验计划维护
+
+qc_klost2user.scx			用户与成本中心关联表
+qc_klost_para.scx			质量成本参数维护
+qc_klost_stat.scx			受托样质量成本统计
+qc_klost_statnew.scx		计划内样质量成本统计(新)
+qc_klost_statplan.scx		计划内样质量成本统计(新)
+qc_klost_vg.scx				特性质量成本组维护
+qc_klost_vg_modify.scx		检验成本组维护表
+
+qc_matnrtype_list.scx		感官平台物料类别维护表
+qc_monitorgroupmodify.scx	监控组主数据维护表
+
+qc_notif_list.scx			缺陷记录单列表
+qc_notif_main.scx			缺陷记录单
+qc_notif_main93.scx			缺陷记录单(三)
+qc_notif_mainf2.scx			缺陷记录单(二)
+
+qc_parallel_ud.scx			平行样原始记录审核
+
+qc_pw_char2grp.scx			特性到特性组维护
+qc_pw_char2grp_mdf.scx		特性组维护
+qc_pw_char2user.scx			特性组到用户组维护
+qc_pw_char2user_mdf.scx		用户组到特性组维护
+qc_pw_chargrp.scx			特性组维护
+qc_pw_user2grp.scx			用户到用户组维护
+qc_pw_user2grp_mdf.scx		用户组维护
+qc_pw_usergrp.scx			用户组维护
+
+qc_arqueryform.scx			检验批查询窗口
+sap_udupload_list.scx		检验批数据上传SAP
+qc_entqueryroom.scx			检验批查询窗口
+
+qc_qalsitem_list.scx		检验结果查询统计报表
+qc_qalsqueryform.scx		检验批查询窗口
+qc_qalsqueryform2.scx		检验批查询窗口
+qc_qalsvtsum_list.scx		计划内检验批结果录入统计报表
+qc_qals_arquery.scx			已复核原始记录查询-界面
+
+qc_qals_list.scx			检验批查询
+qc_qals_modify.scx			检验批明细表=NEW
+qc_qals_modify2.scx			检验批明细表_
+qc_qals_modifysense.scx		检验批明细表(鉴评样)
+qc_qals_modifysex.scx		检验批明细表(新受托样)
+
+qc_qals_ud.scx				原始记录复核-界面(不包含近红外未确认的特性)
+qc_qals_ud_new.scx			原始记录审批-界面(新)
+qc_qals_ud_rfv.scx			近红外原始记录复核-界面
+qc_rfvmgrouprejection.scx	近红外特性过滤主数据
+
+qc_rptfirstqualifiedrate.scx	首支样合格率统计报表
+qc_rptnotfirstqualifiedrate.scx	非首支样合格率统计报表
+
+qc_rpt_cdvt.scx				检验结果不合格列表
+qc_rpt_vtcomp.scx			特性检验结果查询
+qc_rpt_vtcompquery.scx		特性检验结果查询
+
+qc_sample_list.scx			样品单列表
+qc_sample_modify.scx		样品单明细(计划内)
+qc_sample_modify2.scx		样品单明细 
+qc_sample_modify3.scx		样品单明细 (受托样)
+qc_sample_modifys.scx		样品单明细(受托样)
+qc_sample_modifys4.scx		样品单明细(受托样)
+qc_sample_modifysense2.scx	样品单明细(鉴评样)
+qc_sample_modifysex.scx		样品单明细(受托样)
+qc_sample_parallel.scx		平行样维护
+qc_sample_standard_list.scx	标准样列表
+qc_sample_stock.scx			样品入库-样品架选择
+
+qc_saveclequeryform.scx		留样单查询窗口--清出
+qc_saveqals_modify.scx		留样单检验单
+qc_savequeryform.scx		留样单查询窗口
+
+qc_saverpt_compmonitoring.scx	产品留样普查完成情况监控汇总
+qc_saverpt_sapmonitoring.scx	产品留样登记监控报表
+qc_saverpt_vtresult.scx		留样特性检验结果
+
+qc_savesample_clear.scx		留样清出
+qc_savesample_list.scx		留样单列表
+qc_savesample_modify.scx	产品留样
+qc_savesample_putout.scx	留样订单取样信息
+
+qc_senseaufmreport_rtp.scx	前后工序感官明细
+qc_senseprueflos_list.scx	一三级感官鉴评检验批查询
+qc_sensereport_rtp.scx		感官结果记录统计表
+qc_sensescorereport_rtp.scx	感管鉴评积分排名表
+
+qc_shelf_list.scx			样品货架编码维护表
+qc_smpclear_list.scx		样品单明细表
+qc_smpclear_modify.scx		留样样品清样单明细 
+qc_smpclear_modify_insp.scx	检验样品清出
+qc_smpqueryform.scx			检验批查询窗口
+qc_smpvtmodify.scx			代码维护表
+qc_smp_std_queryform.scx	检验批查询窗口
+
+qc_standard_audit.scx		标准样复核
+qc_standard_list.scx		标准样列表
+qc_standard_modify.scx		标准样录入界面
+
+qc_userdeptlist.scx			C/D级特性邮件接收人员列表
+qc_usergroup.scx			感官平台用户组维护表
+qc_usergroup2matnrtype.scx	感官平台物料与权限组配置表
+qc_usergroup_list.scx		感官平台用户组列表
+
+qc_verifysgroupx_list.scx	特殊检验特性组列表
+qc_verifysgroupx_modify.scx	特殊检验组维护表
+qc_verifysgroup_list.scx	检验特性组列表
+qc_verifysgroup_modify.scx	特殊检验组维护表
+qc_verifystang_list.scx		检验特性编码维护表
+qc_vt2ar.scx				检验特性与原始记录关联表
+
+qc_vg2mt_list.scx			特性组关联物料组列表
+qc_vg2mt_modify.scx			特性组关联物料组维护表
+qc_ydmatnrgroup.scx			YD特殊物料组维护
+sap_matnrgroup_list.scx		物料组主数据
+
+qc_wbslist.scx				WBS号主数据维护
+
+qc_xls2qals.scx				导数界面
+sap_download_list.scx		海天质量管理系统数据同步接口
+sap_qals_audit_rt.scx		海天质量管理系统数据同步接口
+sap_udupload_list.scx		检验批数据上传SAP
+sap_upload_run.scx			检验批数据上传SAP
+
+sap_csktex2.scx				客户信息主数据维护
+
+sap_maraex.scx				物料扩展属性维护表
+
+smserrlog.scx				短信收发错误日志
+sysconfig.scx				系统配置
+
+xunj_gr.scx					个人绩效记录
+xunj_grne.scx				个人绩效记录新增/修改
+
+
+
+
+
+
+HttpClient使用连接池PoolingHttpClientConnectionManager
+https://blog.csdn.net/cxy1991xm/article/details/87639004
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+		

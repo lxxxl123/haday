@@ -1,0 +1,127 @@
+SE01 传输组织者 (扩展的)
+SE03 传输组织器工具
+SE06 设置传输组织者
+SE07 CTS 状态显示
+SE09 传输组织者
+SE10 传输组织者
+SE11 ABAP 字典
+SE11_OLD ABAP/4 字典维护
+SE12 ABAP/4 字典显示
+SE12_OLD ABAP/4 字典显示
+SE13 维护技术设置(表)
+SE14 实用程序用于目录表格
+SE15 ABAP/4 贮存信息系统
+
+* SE16 数据浏览器
+
+SE16N General Table Display
+SE17 通用表显示
+SE18 业务附加项: 定义
+SE19 业务附加项: 执行
+SE24 类别制作程序
+SE25 *** 已保留 ***
+SE26 *** 已保留 ***
+SE29 应用包
+SE30 ABAP 对象运行时间分析
+SE32 ABAP/4 文本元素维护
+SE32_OLD ABAP 文本元素维护
+SE32_WB99 ABAP 文本元素维护
+SE33 环境生成程序
+SE35 ABAP/4 如对话模块
+SE36 逻辑数据库
+
+*SE37 ABAP/4 函数模块
+
+SE38 ABAP 编辑器
+SE39 分屏编辑器: 程序比较
+SE40 MP：标准维护和翻译
+SE41 菜单制作器
+SE43 保持区域菜单
+SE43N 保持区域菜单
+SE44 层次显示
+SE48 程序分析：调用层次
+SE49 程序分析：表操作
+SE51 屏幕着色
+SE52 参数化屏幕制作程序调用
+SE54 生成表格视图
+SE55 内部表格视图维护调用
+SE56 内部调用:显示表格视图
+SE57 内部删除表格视图调用
+SE61 R/3 文档
+SE62 工业实用程序
+SE63 翻译: 初始屏幕
+SE63_AUTO 自动分配：初始屏幕
+SE64 术语
+SE65 R/3 文档：短文本统计
+SE66 R/3 文档统计
+SE71 SAP脚本格式
+SE72 SAP 脚本样式
+SE73 SAPscript 字体维护
+SE74 SAPscript 格式转化
+SE75 SAPscript 设置
+SE75TTDTGC SAPscript: Change standard symbols
+SE75TTDTGD SAPscript: Display standard symbols
+SE76 SAPscript: 翻译格式
+SE77 SAPscript 样式转换
+SE78 SAPscript: 图形管理
+SE80 对象浏览器
+SE81 应用层次
+SE82 应用层次
+SE83 Reuse Library
+SE83N Display Reuse Library
+SE83_APPLLOG Reuse Library: Display Appl. Log
+SE83_START Start Reuse Library
+SE84 R/3 库信息系统
+SE85 ABAP/4 贮存信息系统
+SE86 ABAP 资源库信息系统
+SE87 数据模拟器信息系统
+SE88 开发对等信息系统
+SE89 维护信息系统中的树
+SE8I 库信息系统中的清单
+SE90 处理模型信息系统
+SE91 消息维护
+SE92 46A 新的系统日志消息维护
+SE92A 45A 旧的系统日志消息维护
+SE92N 维护系统日志消息
+
+* SE93 维护事务代码
+
+SE94 Customer enhancement simulation
+SE95 修改浏览器
+SE95_UTIL 
+SE97 Maint. transaction call authorizatn
+SEARCH_SAP_MENU 在 SAP 菜单中查找
+SEARCH_USER_MENU 在用户菜单中查找
+SECR 审核信息系统
+SECR_EDIT 编辑审计信息结构
+SECSTO Administration of Secure Memory
+SELVIEW 选择视图维护
+SEM_BEX 业务浏览器分析器
+SEM_NAV 业务浏览器导航器
+SENG 外部索引管理
+SENGEXPLORER Explorer 索引管理
+SEO_PATTERN_GENERATE 更新模式
+SEPS SAP电子包裹服务
+SERP 报表：修改树结构
+SESS 会话管理器菜单树显示
+SESSION_MANAGER 会话管理器菜单树显示
+SESS_START_OBJECT 启动对象
+SEU 资源库浏览器
+SEU_DEPTYPE 维护相关性类型
+SEU_INT 资源库浏览器
+
+
+
+
+
+
+
+
+
+
+
+
+事务
+保质期 ZQME03A
+
+

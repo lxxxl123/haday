@@ -1,0 +1,9 @@
+
+# node版本 12.22.12
+# 命令顺序
+
+	npm i --registry=http://10.254.3.27:8081/repository/npm-ht/
+	npm i  @sk-projects/sk-crud@^2.1.2  --registry=http://10.254.3.27:8081/repository/npm-ht/
+	cnpm i  @sk-projects/sk-crud@^2.1.2  --registry=http://10.254.3.27:8081/repository/npm-ht/
+	npm i  @sk-projects/sk-crud@^2.1.2  --registry=http://10.254.3.27:8081/repository/npm-ht/
+	npm i --registry=http://10.254.3.27:8081/repository/npm-ht/
