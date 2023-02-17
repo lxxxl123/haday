@@ -1,0 +1,4 @@
+  接口名称: 质检MDM_同步成本中心
+           接口操作码: com.haday.QMS.QCMDM_SYNCOSTCENTER.request
+测试环境接口地址: http://10.254.2.54:9191/qmsApi/mdm/syncCostCenter
+生产环境接口地址: http://esb.haday.cn:9090/qmsApi/mdm/syncCostCenter

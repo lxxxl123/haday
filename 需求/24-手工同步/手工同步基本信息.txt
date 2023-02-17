@@ -1,0 +1,13 @@
+sap_download_list.scx		海天质量管理系统数据同步接口
+sap_qals_audit_rt.scx		海天质量管理系统数据同步接口
+
+正式 测试批号 030001152368 
+
+
+100 测试批号 10000887487  10000887491
+	测试日期: 2021-03-19
+
+表: ZQALS
+
+RFC = Z_QM_GET_ZQALSLIST 查询
+Z_QM_SET_SFLAG 置空传输标志

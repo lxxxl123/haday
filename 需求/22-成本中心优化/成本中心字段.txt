@@ -1,0 +1,12 @@
+模型编码	模型名称	MDM字段英文	MDM字段中文	从MDM接收数据填2；将数据分发给MDM填1	业务系统在MDM的编码，由MDM提供	业务系统的表名	业务系统的字段英文	业务系统字段的中文	在分发时需要MDM将字段英文转换为业务系统的字段英文时填1，不然填0	此字段在业务系统的用途	业务系统拿取数据的范围，如：只要在职内部员工/只要内部供应商
+cost_center	成本中心	company_code	公司代码	2	100030	mdm_cost_center	company_code	公司代码	0		
+cost_center	成本中心	cost_center	成本中心编码	2	100030	mdm_cost_center	cost_center	成本中心编码	0		
+cost_center	成本中心	cost_center_name	成本中心名称	2	100030	mdm_cost_center	cost_center_name	成本中心名称	0		
+cost_center	成本中心	describe	成本中心描述	2	100030	mdm_cost_center	describe	成本中心描述	0		
+cost_center	成本中心	start_date	开始生效日期	2	100030	mdm_cost_center	start_date	开始生效日期	0		
+cost_center	成本中心	effective_date	有效截至日期	2	100030	mdm_cost_center	effective_date	有效截至日期	0		
+cost_center	成本中心	costcenter_type	成本中心类型	2	100030	mdm_cost_center	costcenter_type	成本中心类型	0		
+cost_center	成本中心	leader	负责人	2	100030	mdm_cost_center	leader	负责人	0		
+cost_center	成本中心	budget_org_name	预算组织名称	2	100030	mdm_cost_center	budget_org_name	预算组织名称	0		
+cost_center	成本中心	budget_org_parent_name	上级预算组织名称	2	100030	mdm_cost_center	budget_org_parent_name	上级预算组织名称	0		
+cost_center	成本中心	budget_org	HBK预算组织	2	100030	mdm_cost_center	budget_org	HBK预算组织	0		

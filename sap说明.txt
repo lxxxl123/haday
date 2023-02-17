@@ -1,7 +1,7 @@
 130:
 tqm  qmstest
 120 
-zcallrfc 1234567
+zcallrfc 123456
 
 200:
 192.168.0.79
@@ -24,3 +24,5 @@ se10 提交请求
 
 RFC: 
 ZQM_MATNR_EXP
+Z_QM_DDBT_INFO1
+Z_QM_DDBT_MODIFY

@@ -1,0 +1,524 @@
+Parameters inIsTest as Integer ,;
+	tcFName as String,;
+	inSMPID as Integer ,;
+	icVTID as String ,;
+	icSMPNO as String ,;
+	icVTNO as String ,;
+	icPrueflos as String ,;
+	inSecular as Integer ,;
+	icFormName as String ,;
+	ilReUpLoad		 &&,tcTable as String ,tciCur as String	
+IF EMPTY(inIsTest )
+	IF !glSAPTest 
+		inIStest = 0
+	Else
+		IF  glSAPTest OR glDebug OR _vfp.StartMode = 0  
+			inIStest = 1
+		ELSE
+			inIStest = 0
+		ENDIF 
+	ENDIF 
+ELSE
+	IF inIsTest =9		&&强制为正式环境
+		inIStest = 0
+	ENDIF 	
+ENDIF 
+This.nistest = m.inIsTest  && 0
+This.csmpno = m.icSMPNO
+this.cvtno = m.icVTNO
+This.cprueflos = m.icPrueFlos
+This.nsmpid = m.inSMPID
+This.cvtid = m.icVTID
+This.lSecular = m.inSecular
+this.icFormName = m.icFormName && '菜单窗口名'
+This.cfname = m.tcFName   && 'BAPI_INSPOPER_RECORDRESULTS'
+This.ilReUpLoad = m.ilReUpLoad  && 'true'
+
+This.dupdate = CTOD("")
+This.lupdate = .F. 
+
+This.icErrMess = ''		&&清除错误信息
+This.inStatus = 0
+
+LOCAL toConnection as Object
+m.toConnection = This.getconnect(m.inISTest)
+
+If !(Type("m.toConnection.IsConnected")="N" And m.toConnection.IsConnected=1)
+	This.iupsqlmess(" 连接SAP失败,状态异常!",3)
+	RETURN .F.
+ENDIF 
+
+ Local loConn As Object, loFunc As Object, loTable As Object,loTable1 As Object
+    
+	*　   '   通过RFC接口远程运行SAP内部函数 
+    m.loConn = Createobject("SAP.FUNCTIONS")
+    m.loConn.Connection = m.toConnection
+    
+	*'   赋要调用的SAP内建函数名 
+    m.loFunc = m.loConn.Add(m.tcFName)      && 函数名称
+   	m.loFuncCOMM = m.loConn.Add('BAPI_TRANSACTION_COMMIT')      && 函数名称    
+   	
+    m.loTable = m.loFunc.EXPORTS("INSPPOINTDATA")   	&&
+     m.loINSPLOT = m.loFunc.EXPORTS("INSPLOT")   	&&
+     m.loINSPOPER = m.loFunc.EXPORTS("INSPOPER")   	&&     
+     
+   	m.loTable1 = m.loFunc.Tables("SAMPLE_RESULTS")   	&&  
+ 	m.loReturn = m.loFunc.Imports("RETURN")
+ 	m.loRETURNTABLE = m.loFunc.Tables("RETURNTABLE")
+ 	m.loCHAR_RESULTS = m.loFunc.Tables("CHAR_RESULTS")
+ 
+	*"----------------------------------------------------------------------
+	* === 回写SAP表
+	*"----------------------------------------------------------------------
+*====================不,
+IF EMPTY(inSecular ) &&-- 非长期特性
+   		icMess = "===>准备处理检验点:"+ALLTRIM(icSMPNO) + TTOC(DATETIME() )
+   		This.iupsqlmess(icMess)
+    	TEXT TO icSQLString TEXTMERGE NOSHOW  
+			SELECT  [QC_Sample_Main].[nID]
+      ,[QC_Sample_Main].[nStatus]
+      ,[QC_Sample_Main].[WERK]
+      ,[QC_Sample_Main].[cNO]
+      ,[QC_Sample_Main].[nNoItem]
+      ,[QC_Sample_Main].[AUFNR]
+      ,[QC_Sample_Main].[EBELN]
+      ,[QC_Sample_Main].[MATNR]
+      ,[QC_Sample_Main].[KTEXTMAT]
+      ,[QC_Sample_Main].[cSection]
+      ,[QC_Sample_Main].[CHARG]
+      ,[QC_Sample_Main].[dExpiryDate]
+      ,[QC_Sample_Main].[nNum]
+      ,[QC_Sample_Main].[dArrive]
+      ,[QC_Sample_Main].[cArriveUser]
+      ,[QC_Sample_Main].[cInceptUser]
+      ,[QC_Sample_Main].[cAdoptUser]
+      ,[QC_Sample_Main].[dAdopt]
+      ,[QC_Sample_Main].[cShelfNO]
+      ,[QC_Sample_Main].[dStock]
+      ,[QC_Sample_Main].[cStockUser]
+      ,[QC_Sample_Main].[dKeep]
+      ,[QC_Sample_Main].[cKeepUser]
+      ,[QC_Sample_Main].[Prueflos]
+      ,[QC_Sample_Main].[PrueflosEx]
+      ,[QC_Sample_Main].[cNodeNO]
+      ,[QC_Sample_Main].[cItemNO]
+      ,[QC_Sample_Main].[nCrtUser]
+      ,[QC_Sample_Main].[dCrtDate]
+      ,[QC_Sample_Main].[cMemo]
+      ,[QC_Sample_Main].[nAUdit]
+      ,[QC_Sample_Main].[dAudit]
+      ,[QC_Sample_Main].[cAudit]
+      ,[QC_Sample_Main].[lAUdit]
+      ,[QC_Sample_Main].[lClear]
+      ,[QC_Sample_Main].[nClear]
+      ,[QC_Sample_Main].[dClear]
+      ,[QC_Sample_Main].[cClear]
+      ,[QC_Sample_Main].[nParentID]
+      ,[QC_Sample_Main].[dPDDate]
+      ,[QC_Sample_Main].[cPDNO]
+      ,[QC_Sample_Main].[nType]
+      ,[QC_Sample_Main].[nMdyUser]
+      ,[QC_Sample_Main].[dMdyDate]
+      ,[QC_Sample_Main].[nItemID]
+      ,[QC_Sample_Main].[Userc1]
+      ,[QC_Sample_Main].[Userc2]
+      ,[QC_Sample_Main].[UserN1]
+      ,[QC_Sample_Main].[UserN2]
+      ,[QC_Sample_Main].[USERD]
+      ,[QC_Sample_Main].[PHYS_SMPL]
+      ,[QC_Sample_Main].[nShelfID]
+      ,[QC_Sample_Main].[lDeleTag]
+      ,[QC_Sample_Main].[nDelUser]
+      ,[QC_Sample_Main].[dDelDate]
+      ,[QC_Sample_Main].[nMonth]
+      ,[QC_Sample_Main].[SLWBEZ]
+      ,[QC_Sample_Main].[lrationalize]
+      ,[QC_Sample_Main].[ldram]
+      ,[QC_Sample_Main].[lmicrobe]
+      ,[QC_Sample_Main].[VORNR]
+      ,[QC_Sample_Main].[cTemperature]
+      ,[QC_Sample_Main].[cMoist]
+      ,[QC_Sample_Main].[cUDCODE]
+      ,[QC_Sample_Main].[nUDID]
+      ,[QC_Sample_Main].[PROBENR]
+      ,[QC_Sample_Main].[nUDUser]
+      ,[QC_Sample_Main].[dUDCrtDate]
+      ,[QC_Sample_Main].[nUDAudit]
+      ,[QC_Sample_Main].[nCDGTID]
+      ,[QC_Sample_Main].[nCDGPID]
+      ,[QC_Sample_Main].[cCDGTNO]
+      ,[QC_Sample_Main].[cCDGPNO]
+      ,[QC_Sample_Main].[lUpLoad]
+      ,[QC_Sample_Main].[dUpLoad]
+      ,[QC_Sample_Main].[nRationalize]
+      ,[QC_Sample_Main].[dRationalize]
+      ,[QC_Sample_Main].[nDram]
+      ,[QC_Sample_Main].[dDram]
+      ,[QC_Sample_Main].[nMicrobe]
+      ,[QC_Sample_Main].[dMicrobe]
+      ,[QC_Sample_Main].[cDram]
+      ,[QC_Sample_Main].[cMicrobe]
+      ,[QC_Sample_Main].[cTMPDram]
+      ,[QC_Sample_Main].[cTMPMicrobe]
+      ,[QC_Sample_Main].[cTMPRationalize]
+      ,[QC_Sample_Main].[cStatus]
+      ,[QC_Sample_Main].[cCondition]
+      ,[QC_Sample_Main].[cModel]
+      ,[QC_Sample_Main].[cMSTDram]
+      ,[QC_Sample_Main].[cMSTMicrobe]
+      ,[QC_Sample_Main].[cMSTPRationalize]
+      ,[QC_Sample_Main].[nNoRight]
+      ,[QC_Sample_Main].[cSimpNum]
+      ,[QC_Sample_Main].[nRoomID]
+      ,[QC_Sample_Main].[cIniSmp]
+      ,[QC_Sample_Main].[dSysDate]
+      ,[QC_Sample_Main].[cPDLine]
+      ,[QC_Sample_Main].[cPDCharg]
+      ,[QC_Sample_Main].[dArriveDate]
+      ,[QC_Sample_Main].[tPDTime]
+      ,[QC_Sample_Main].[cPutOut]
+      ,[QC_Sample_Main].[KOSTV]
+      ,[QC_Sample_Main].[cWBS]
+      ,[QC_Sample_Main].[cSVNO]
+      ,[QC_Sample_Main].[nSAVUser]
+      ,[QC_Sample_Main].[dCrtSAV]
+      ,[QC_Sample_Main].[dSavDate]
+      ,[QC_Sample_Main].[cAdoptUser2]
+      ,[QC_Sample_Main].[dAdopt2]
+      ,[QC_Sample_Main].[nType2]
+      ,[QC_Sample_Main].[nStatus2]
+      ,[QC_Sample_Main].[dSAVClear]
+      ,[QC_Sample_Main].[KOSTL]
+      ,[QC_Sample_Main].[cENTNO]
+      ,[QC_Sample_Main].[lFirst]
+      ,[QC_Sample_Main].[nRPLine]
+				,SAP_QAMV.vornr as vornr2
+				,SAP_QAMV.MERKNR
+				,SAP_QAMV.PHYNR
+				,SAP_QAMV.KATALGART1
+				,SAP_QAMV.AUSWMENGE1
+				,SAP_QAMV.steuerkz
+				,Sap_qals.slwbez as slwbezX 
+				,Sap_qals.art as ARTx
+				,PowerUser.cName as cPWUser
+				,PowerUser.cLogin
+				,QC_CodeItem.cName as cCodeName
+				From QC_Sample_Main With (nolock) 
+				Left join SAP_QAMV on SAP_QAMV.nID = QC_Sample_Main.nItemID
+				Left Join Sap_qals on Sap_qals .nID = QC_Sample_Main.nparentID
+				Left Join PowerUser on PowerUser.nID = QC_Sample_Main.nCrtUser
+				Left Join QC_CodeItem on QC_CodeItem.nID = QC_Sample_Main.nUDID
+				Where QC_Sample_Main.nID =<<This.nsmpid>>  
+					And QC_Sample_Main.lDeletag <> 1
+					And SAP_QAMV.lDeleTag <> 1
+    	ENDTEXT 
+		IF !GetSQLCursor('iCur_Sample',m.icsqlstring,.T.,'qc')
+			This.iupsqlmess(   ' 提取检验点数据失败!',15)
+			tHIS.Sapdisconnect(m.toConnection)
+			RETURN .F.
+		EndIf
+		
+		IF iCur_Sample.nType = 2 Or iCur_Sample.nType = 4 Or iCur_Sample.nType  = 5
+			RETURN .t.
+		EndIf
+		
+		This.iupsqlmess("    检索到检验单:"+ALLTRIM(STR(RECCOUNT([iCur_Sample])))+'条,正在组织数据')
+		&&----------写入检验批记录---------------------
+		SELECT iCur_Sample
+		SCAN all 
+    		This.dupdate = CTOD("")
+			This.lupdate = .F. 
+					
+			m.loINSPLOT.Value = this.cprueflos 
+			m.loINSPOPER.Value = iCur_Sample.Vornr2		&&("INSPOPER")
+	        m.loRow = m.loTable 
+			IF !This.wrtlorow(m.loROW)
+				tHIS.Sapdisconnect(m.toConnection)
+				RETURN .F.
+			ENDIF 
+			
+			&&----------写入特性记录---------------------
+			IF !EMPTY(icVTID)
+				TEXT TO icSQLString TEXTMERGE NOSHOW 
+					SELECT [QC_Sample_QASR].[nID]
+      ,[QC_Sample_QASR].[nParentID]
+      ,[QC_Sample_QASR].[nItemID]
+      ,[QC_Sample_QASR].[Prueflos]
+      ,[QC_Sample_QASR].[vorglfnr]
+      ,[QC_Sample_QASR].[VORNR]
+      ,[QC_Sample_QASR].[PROBENR]
+      ,[QC_Sample_QASR].[MERKNR]
+      ,[QC_Sample_QASR].[VERWMERKM]
+      ,[QC_Sample_QASR].[SATZSTATUS]
+      ,[QC_Sample_QASR].[STEUERKZ]
+      ,[QC_Sample_QASR].[TOLERANZOB]
+      ,[QC_Sample_QASR].[TOLERANZUN]
+      ,[QC_Sample_QASR].[DUMMY40]
+      ,[QC_Sample_QASR].[MASSEINHSW]
+      ,[QC_Sample_QASR].[AUSWMGWRK1]
+      ,[QC_Sample_QASR].[KATALGART1]
+      ,[QC_Sample_QASR].[AUSWMENGE1]
+      ,[QC_Sample_QASR].[cCodeNO]
+      ,[QC_Sample_QASR].[nCodeItemID]
+      ,[QC_Sample_QASR].[MESSWERTE]
+      ,[QC_Sample_QASR].[cOrder]
+      ,[QC_Sample_QASR].[cTag]
+      ,[QC_Sample_QASR].[cARNO]
+      ,[QC_Sample_QASR].[nAPPARAID]
+      ,[QC_Sample_QASR].[nARWERTE]
+      ,[QC_Sample_QASR].[lAudit]
+      ,[QC_Sample_QASR].[cAudit]
+      ,[QC_Sample_QASR].[nAUdit]
+      ,[QC_Sample_QASR].[dAudit]
+      ,[QC_Sample_QASR].[nVTID]
+      ,[QC_Sample_QASR].[nARID]
+      ,[QC_Sample_QASR].[dVTDate]
+      ,[QC_Sample_QASR].[nVTUser]
+      ,[QC_Sample_QASR].[cVTUser]
+      ,[QC_Sample_QASR].[lDeleTag]
+      ,[QC_Sample_QASR].[dCLSDate]
+      ,[QC_Sample_QASR].[nClSUser]
+      ,[QC_Sample_QASR].[cClSUser]
+      ,[QC_Sample_QASR].[lUpLoad]
+      ,[QC_Sample_QASR].[dUpLoad]
+      ,[QC_Sample_QASR].[cCodeGPNO]
+      ,[QC_Sample_QASR].[nCodeGPID]
+      ,[QC_Sample_QASR].[cExpressions]
+      ,[QC_Sample_QASR].[cVerify]
+      ,[QC_Sample_QASR].[cLevel]
+      ,[QC_Sample_QASR].[Res_org]
+      ,[QC_Sample_QASR].[REMARK]
+      ,[QC_Sample_QASR].[STELLEN]
+      ,[QC_Sample_QASR].[mseh6]
+      ,[QC_Sample_QASR].[cAccord]
+      ,[QC_Sample_QASR].[cWarpValue]
+      ,[QC_Sample_QASR].[cParallelExpType]
+      ,[QC_Sample_QASR].[cParallelRateA]
+      ,[QC_Sample_QASR].[cParallelRateB]
+      ,[QC_Sample_QASR].[cChroma]
+      ,[QC_Sample_QASR].[cWindageRateA]
+      ,[QC_Sample_QASR].[cWindageRateB]
+      ,[QC_Sample_QASR].[lConfirm]
+      ,[QC_Sample_QASR].[dConfirm]
+      ,[QC_Sample_QASR].[nConfirm]
+						,PowerUser.cName as cPWName
+						,PowerUser.cLogin		
+						,QC_CodeItem.cName as cCodeName				
+						From Qc_Sample_QASR With (nolock) 
+						Left Join QC_CodeItem With (nolock)  on QC_CodeItem.nID = QC_Sample_QASR.nCodeItemID
+						Left Join PowerUser With (nolock)  on PowerUser.nID = Qc_Sample_QASR.nVTUser
+						Where Qc_Sample_QASR.nARID <=0 
+							And Qc_Sample_QASR.nParentID = <<This.nsmpid>>
+							And Qc_Sample_QASR.nVTID IN (<<This.cvtid >>)
+							And Qc_Sample_QASR.lDeleTag <> 1
+				ENDTEXT 
+
+*!*								And Qc_Sample_QASR.PrueFlos = '<<icSMPNO>>'
+*!*								And Qc_Sample_QASR.Vornr = '<<iCur_Sample.Vornr2>>'
+				IF !GetSQLCursor('iCur_QASR',m.icsqlstring,.T.,'qc')
+					This.iupsqlmess(   ' 提取检验特性数据失败!',15) 
+					tHIS.Sapdisconnect(m.toConnection)
+					RETURN .F.
+				ENDIF 
+				This.iupsqlmess("    检索到特性记录:"+ALLTRIM(STR(RECCOUNT([iCur_QASR])))+'条,正在组织数据...')
+				SELECT iCur_QASR
+				SCAN ALL
+					SELECT iCur_QASR
+					m.loRow2 = m.loTable1.AppendRow
+					IF !this.wrtlorow2(m.loROW2)
+						tHIS.Sapdisconnect(m.toConnection)
+						RETURN .F.
+					ENDIF 
+
+				ENDSCAN 
+			ENDIF 
+			
+		    If m.loFunc.Call                        && 执行函数
+		    	IF !this.rfcreturnmess(1,m.loRETURNTABLE,m.loFuncCOMM)
+		    		tHIS.Sapdisconnect(m.toConnection)
+		    		RETURN .F.
+		    	ELSE
+	    	
+		    	ENDIF 
+				This.iupsqlmess( "-----完成对SAP BAPI函数的调用!"+ TTOC(DATETIME() ) )
+		    ELSE
+		    	IF !this.rfcreturnmess(0,m.loRETURNTABLE,m.loFuncCOMM)
+		    		tHIS.Sapdisconnect(m.toConnection)
+		    		RETURN .F.
+		    	ENDIF 
+				icMess = CHR(13)+ "*******在执行m.loFunc.Call 处出错 " + m.loReturn.Value(3) +"  "+TTOC(DATETIME())
+				This.iupsqlmess(icMess,99)
+		        m.toConnection.LastError
+		       * = Messagebox("Call 函数失败！", 0+16+0, "SAP.Logon",5000)
+		*       This.oform.writeerrlog("SAPToTRANS的loSAPCall 函数失败！",This.oform.geterrmsg) 
+		    ENDIF
+		    
+    		This.dupdate = CTOD("")
+			This.lupdate = .F. 
+					    
+	    	 m.loRow = ''
+	    	 m.loRow2 = ''
+	    	 m.loTable1 = ''
+	    	 m.loTable = ''
+	    	 m.loINSPOPER = ''
+	    	 m.loINSPLOT = ''
+	    	 m.loReturn = ''
+	    	 m.loRETURNTABLE = ''
+		    m.loTable = m.loFunc.EXPORTS("INSPPOINTDATA")   	&&
+		    m.loINSPLOT = m.loFunc.EXPORTS("INSPLOT")   	&&
+		    m.loINSPOPER = m.loFunc.EXPORTS("INSPOPER")   	&&     
+		    m.loRETURNTABLE = m.loFunc.Tables("RETURNTABLE")
+		   	m.loTable1 = m.loFunc.Tables("SAMPLE_RESULTS")   	&&  
+		 	m.loReturn = m.loFunc.Imports("RETURN")			    
+
+ 	ENDSCAN 
+ 	
+ELSE	&&-------------------处理长期特性
+
+			
+	IF !EMPTY(icVTID)
+		TEXT TO icSQLString TEXTMERGE NOSHOW 
+			SELECT [QC_Sample_QASR].[nID]
+      ,[QC_Sample_QASR].[nParentID]
+      ,[QC_Sample_QASR].[nItemID]
+      ,[QC_Sample_QASR].[Prueflos]
+      ,[QC_Sample_QASR].[vorglfnr]
+      ,[QC_Sample_QASR].[VORNR]
+      ,[QC_Sample_QASR].[PROBENR]
+      ,[QC_Sample_QASR].[MERKNR]
+      ,[QC_Sample_QASR].[VERWMERKM]
+      ,[QC_Sample_QASR].[SATZSTATUS]
+      ,[QC_Sample_QASR].[STEUERKZ]
+      ,[QC_Sample_QASR].[TOLERANZOB]
+      ,[QC_Sample_QASR].[TOLERANZUN]
+      ,[QC_Sample_QASR].[DUMMY40]
+      ,[QC_Sample_QASR].[MASSEINHSW]
+      ,[QC_Sample_QASR].[AUSWMGWRK1]
+      ,[QC_Sample_QASR].[KATALGART1]
+      ,[QC_Sample_QASR].[AUSWMENGE1]
+      ,[QC_Sample_QASR].[cCodeNO]
+      ,[QC_Sample_QASR].[nCodeItemID]
+      ,[QC_Sample_QASR].[MESSWERTE]
+      ,[QC_Sample_QASR].[cOrder]
+      ,[QC_Sample_QASR].[cTag]
+      ,[QC_Sample_QASR].[cARNO]
+      ,[QC_Sample_QASR].[nAPPARAID]
+      ,[QC_Sample_QASR].[nARWERTE]
+      ,[QC_Sample_QASR].[lAudit]
+      ,[QC_Sample_QASR].[cAudit]
+      ,[QC_Sample_QASR].[nAUdit]
+      ,[QC_Sample_QASR].[dAudit]
+      ,[QC_Sample_QASR].[nVTID]
+      ,[QC_Sample_QASR].[nARID]
+      ,[QC_Sample_QASR].[dVTDate]
+      ,[QC_Sample_QASR].[nVTUser]
+      ,[QC_Sample_QASR].[cVTUser]
+      ,[QC_Sample_QASR].[lDeleTag]
+      ,[QC_Sample_QASR].[dCLSDate]
+      ,[QC_Sample_QASR].[nClSUser]
+      ,[QC_Sample_QASR].[cClSUser]
+      ,[QC_Sample_QASR].[lUpLoad]
+      ,[QC_Sample_QASR].[dUpLoad]
+      ,[QC_Sample_QASR].[cCodeGPNO]
+      ,[QC_Sample_QASR].[nCodeGPID]
+      ,[QC_Sample_QASR].[cExpressions]
+      ,[QC_Sample_QASR].[cVerify]
+      ,[QC_Sample_QASR].[cLevel]
+      ,[QC_Sample_QASR].[Res_org]
+      ,[QC_Sample_QASR].[REMARK]
+      ,[QC_Sample_QASR].[STELLEN]
+      ,[QC_Sample_QASR].[mseh6]
+      ,[QC_Sample_QASR].[cAccord]
+      ,[QC_Sample_QASR].[cWarpValue]
+      ,[QC_Sample_QASR].[cParallelExpType]
+      ,[QC_Sample_QASR].[cParallelRateA]
+      ,[QC_Sample_QASR].[cParallelRateB]
+      ,[QC_Sample_QASR].[cChroma]
+      ,[QC_Sample_QASR].[cWindageRateA]
+      ,[QC_Sample_QASR].[cWindageRateB]
+      ,[QC_Sample_QASR].[lConfirm]
+      ,[QC_Sample_QASR].[dConfirm]
+      ,[QC_Sample_QASR].[nConfirm]
+				,PowerUser.cName as cPWName
+				,PowerUser.cLogin				
+				,Qc_Sample_Main.PROBENR as PROBENR2
+				,Qc_Sample_Main.nType
+				From Qc_Sample_QASR  With (nolock) 
+				Left Join PowerUser  With (nolock)  on PowerUser.nID = Qc_Sample_QASR.nVTUser
+				Left Join Qc_Sample_Main  With (nolock)  on Qc_Sample_Main.nID = Qc_Sample_QASR.nParentID 
+				Left Join SAP_QALS With (nolock)  on SAP_QALS.nID = Qc_Sample_Main.nParentID
+				Where Qc_Sample_QASR.nARID <=0 
+					And Qc_Sample_QASR.nParentID = <<This.nsmpid>>
+					And Qc_Sample_QASR.nVTID IN (<<This.cvtid >>)
+					And Qc_Sample_QASR.lDeleTag <> 1
+		ENDTEXT 
+ 
+		IF !GetSQLCursor('iCur_SROW',m.icsqlstring,.T.,'qc')
+			This.iupsqlmess(   ' 提取检验特性数据失败!',15) 
+			tHIS.Sapdisconnect(m.toConnection)
+			RETURN .F.
+		ENDIF 
+		IF iCur_SROW.nType = 2 Or iCur_SROW.nType = 4 Or iCur_SROW.nType  = 5
+			RETURN .t.
+		ENDIF 
+		SELECT iCur_SROW
+		SCAN all
+			IF iCur_SROW.nType = 2 Or iCur_SROW.nType = 4 Or iCur_SROW.nType  = 5
+				RETURN .t.
+			ENDIF 
+    		This.dupdate = CTOD("")
+			This.lupdate = .F. 
+					
+			m.loINSPLOT.Value = this.cprueflos 
+			m.loINSPOPER.Value = iCur_SROW.Vornr		&&("INSPOPER")
+		&&------写入数据
+			m.loSROW = m.loCHAR_RESULTS.AppendRow
+			This.wrtlosrow(m.loSROW)
+			
+			
+		    If m.loFunc.Call                        && 执行函数
+		    	IF !this.rfcreturnmess(1,m.loRETURNTABLE,m.loFuncCOMM)
+		    		tHIS.Sapdisconnect(m.toConnection)
+		    		RETURN .F.
+		    	ELSE
+ 
+					
+		    	ENDIF 
+				This.iupsqlmess( "-----完成对SAP BAPI函数的调用!"+ TTOC(DATETIME() ) )
+		    ELSE
+		    	IF !this.rfcreturnmess(0,m.loRETURNTABLE,m.loFuncCOMM)
+		    		tHIS.Sapdisconnect(m.toConnection)
+		    		RETURN .F.
+		    	ENDIF 
+  	
+				icMess =  "*******在回写时m.loFunc.Call 处执失错误 "+ m.loReturn.Value(3) + TTOC(getsysdate(,.T.),9)
+				This.iupsqlmess(icMess,99)
+				m.toConnection.LastError
+				tHIS.Sapdisconnect(m.toConnection)
+				RETURN .F.
+		        *
+		       * = Messagebox("Call 函数失败！", 0+16+0, "SAP.Logon",5000)
+		*       This.oform.writeerrlog("SAPToTRANS的loSAPCall 函数失败！",This.oform.geterrmsg) 
+		    ENDIF	
+		    
+    		This.dupdate = CTOD("")
+			This.lupdate = .F. 
+			
+		   	m.loSROW  = ''
+	  	 	m.loINSPOPER = ''
+	    	m.loINSPLOT = ''
+	    	m.loReturn = ''
+	    	m.loRETURNTABLE = ''
+	    	m.loCHAR_RESULTS = ''
+		    m.loINSPLOT = m.loFunc.EXPORTS("INSPLOT")   	&&
+		    m.loINSPOPER = m.loFunc.EXPORTS("INSPOPER")   	&&     
+		    m.loRETURNTABLE = m.loFunc.Tables("RETURNTABLE")
+		 	m.loReturn = m.loFunc.Imports("RETURN")			    
+		 	m.loCHAR_RESULTS = m.loFunc.Tables("CHAR_RESULTS") 	
+		ENDSCAN 
+		
+	    	
+	ENDIF 
+ENDIF 
+tHIS.Sapdisconnect(m.toConnection)
+RETURN 

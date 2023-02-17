@@ -1,0 +1,1 @@
+/usr/HIP/tomcat_HIP/logs/WEB-INF/log/

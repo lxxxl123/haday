@@ -1,0 +1,17 @@
+LPARAMETERS loSROW
+ 
+m.loSROW.Value("INSPLOT") = ALLTRIM(iCur_SROW.PRUEFLOS)	&& Evaluate("PRUEFLOS")
+m.loSROW.Value("INSPOPER") = ALLTRIM(iCur_SROW.Vornr)
+&&m.loSROW.Value("INSPCHAR") = ALLTRIM(iCur_SROW.PROBENR2)
+m.loSROW.Value("INSPCHAR") = ALLTRIM(iCur_SROW.MERKNR)
+
+m.loSROW.Value("CLOSED") = 'X'
+IF EMPTY(iCur_SROW.AUSWMENGE1)
+    m.loSROW.Value("MEAN_VALUE") = iCur_SROW.MESSWERTE
+ELSE
+	m.loSROW.Value("CODE1") = ALLTRIM(iCur_SROW.cCodeNO)
+	m.loSROW.Value("Code_GRP1") = ALLTRIM(iCur_SROW.cCodeGPNO)
+ENDIF 
+m.loSROW.Value("INSPECTOR") =  ALLTRIM(iCur_SROW.cLogin)
+
+RETURN .T.
