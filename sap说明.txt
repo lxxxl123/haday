@@ -1,6 +1,8 @@
 130:
+192.168.0.78
 tqm  qmstest
 120 
+192.168.0.78
 zcallrfc 123456
 
 200:
@@ -26,3 +28,24 @@ RFC:
 ZQM_MATNR_EXP
 Z_QM_DDBT_INFO1
 Z_QM_DDBT_MODIFY
+
+
+# 常用表
+	ZQALS 检验批中间表
+	CRHD 成本中心表
+
+
+
+
+# 常用事务 
+	cooispi 查看订单信息
+
+
+
+# sap修改表信息
+- 输入: se16n
+- 输入表名
+- 输入/H
+
+- 新增/修改列 GD-EDIT X
+- 新增/修改列 GD-SAPEDIT X

@@ -1,7 +1,0 @@
-sap流程
-事务 ZQME03A
-程序 ZQMED_03
-表 ZQMTSTKD
-
-ZQM_MATNR_EXP
-
