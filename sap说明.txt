@@ -49,3 +49,7 @@ Z_QM_DDBT_MODIFY
 
 - 新增/修改列 GD-EDIT X
 - 新增/修改列 GD-SAPEDIT X
+
+
+
+## 任务列表 同步检验批 Z_QM_GET_INSPOPERLIST
